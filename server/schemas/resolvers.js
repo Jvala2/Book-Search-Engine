@@ -21,8 +21,28 @@ const resolvers = {
       createBook: async (parent, { user }) => {
         return await book.create({ user });
       },
+      saveBook: async (parent, { bookId, user }) => {
+        if (user_id) {
+            const updatedUser = await User.findByIdAndUpdate(
+                {_id: user_id },
+                { $push: { savedBooks: { bookId } } },
+                { new: true }
+            );
+            
+        return updatedUser;
+            }
+        },
       removeBook: async (parent, { bookId, user }) => {
-          return await book.destroy({ user });
+          if (user_id) {
+              const updatedUser = await User.findOneAndUpdate(
+                  {_id: user_id },
+                  { $pull: { savedBooks: { bookId } } },
+                  { new: true }
+              );
+              
+          return updatedUser;
+
+          }
       },
       createUser: async (parent, { bookId, userSchema }) => {
         return await book.findOneAndUpdate(
