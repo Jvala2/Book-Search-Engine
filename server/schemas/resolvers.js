@@ -15,7 +15,7 @@ const resolvers = {
       },
   
     },
-    }
+    
     
     Mutation: {
       createBook: async (parent, { user }) => {
