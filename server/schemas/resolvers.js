@@ -46,6 +46,24 @@ const resolvers = {
 
           }
       },
+
+      
+      login: async (parent, { email, password }) => {
+        const user = await User.findOne({ email });
+        if (!user) {
+            throw new AuthenticationError('Incorrect Username or Password.');
+        }
+
+        const passwordRight = await user.isCorrectPassword(password);
+
+        if (!passwordRight) {
+            throw new AuthenticationError('Incorrect Username or Password.');
+        }
+        const token = sighnToken(user);
+        return { token, user };
+      },
+
+
       createUser: async (parent, { bookId, userSchema }) => {
         return await book.findOneAndUpdate(
           { _id: bookId },
