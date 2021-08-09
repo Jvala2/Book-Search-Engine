@@ -1,7 +1,7 @@
 const { Book, Index, User } = require('../models');
 
 const resolvers = {
-
+    Query:{
     allbooks: async () => {
         return await book.find();
       },
@@ -15,9 +15,10 @@ const resolvers = {
       },
   
     },
-  
+    }
+    
     Mutation: {
-      createbook: async (parent, { user }) => {
+      createBook: async (parent, { user }) => {
         return await book.create({ user });
       },
       createUser: async (parent, { bookId, userSchema }) => {
