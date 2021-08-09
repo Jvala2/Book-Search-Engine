@@ -21,6 +21,9 @@ const resolvers = {
       createBook: async (parent, { user }) => {
         return await book.create({ user });
       },
+      removeBook: async (parent, { bookId, user }) => {
+          return await book.destroy({ user });
+      },
       createUser: async (parent, { bookId, userSchema }) => {
         return await book.findOneAndUpdate(
           { _id: bookId },
