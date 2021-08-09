@@ -10,8 +10,8 @@ const resolvers = {
         return await book.findOne({ _id: bookId });
       },
   
-      getAllTech: async () => {
-        return await Tech.find();
+      getAllUser: async () => {
+        return await User.find();
       },
   
     },
