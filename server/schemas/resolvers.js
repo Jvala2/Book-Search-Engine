@@ -4,25 +4,18 @@ const { Book, Index, User } = require('../models');
 
 const resolvers = {
     Query:{
-    allbooks: async () => {
-        return await book.find();
-      },
-  
-      getbook: async (parent, { bookId }) => {
-        return await book.findOne({ _id: bookId });
-      },
-  
-      getAllUser: async () => {
-        return await User.find();
-      },
+    me: async (parent, args, context) => {
+        console.log("useringormation",constext.user);
+        return await User.findById(context.user._id);
+    },
   
     },
     
     
     Mutation: {
-      createBook: async (parent, { user }) => {
+      /*createBook: async (parent, { user }) => {
         return await book.create({ user });
-      },
+      },*/
       saveBook: async (parent, { bookId, user }) => {
         if (user_id) {
             const updatedUser = await User.findByIdAndUpdate(
@@ -47,7 +40,7 @@ const resolvers = {
           }
       },
 
-      
+
       login: async (parent, { email, password }) => {
         const user = await User.findOne({ email });
         if (!user) {
