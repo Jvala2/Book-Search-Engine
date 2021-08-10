@@ -15,7 +15,7 @@ export const LOGIN_USER = gql`
 `;
 
 
-export const ADD_BOOK = gql`
+export const CREATE_BOOK = gql`
     mutation createBook($bookData: BookInput!) {
         createBook(bookData: $bookData) {
             _id
@@ -31,7 +31,7 @@ export const ADD_BOOK = gql`
             }
         }
 
-        }
+        
     }
     `;
 
@@ -51,7 +51,7 @@ export const ADD_BOOK = gql`
             }
         }
 
-        }
+        
     }
     `;
 export const ADD_USER = gql`
